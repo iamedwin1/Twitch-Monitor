@@ -13,9 +13,9 @@ namespace TwitchMonitor
 {
     public partial class MainWindow
     {
-        public System.Windows.Forms.NotifyIcon MyNotifyIcon;
-        List<string> list = new List<string>();
-        System.Collections.Specialized.StringCollection lists = new System.Collections.Specialized.StringCollection();
+        public NotifyIcon MyNotifyIcon;
+
+        private System.Collections.Specialized.StringCollection _lists;
 
         public MainWindow()
         {
@@ -32,7 +32,7 @@ namespace TwitchMonitor
             if (Properties.Settings.Default.listStrings == null)
                 Properties.Settings.Default.listStrings = new System.Collections.Specialized.StringCollection();
 
-            lists = Properties.Settings.Default.listStrings;
+            _lists = Properties.Settings.Default.listStrings;
 
             foreach (var url in Properties.Settings.Default.listStrings)
                 ListBox1.Items.Add(new Stream(url));
@@ -62,8 +62,8 @@ namespace TwitchMonitor
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             ListBox1.Items.Add(new Stream(TextBox1.Text));
-            lists.Add(TextBox1.Text);
-            Properties.Settings.Default.listStrings = lists;
+            _lists.Add(TextBox1.Text);
+            Properties.Settings.Default.listStrings = _lists;
             Properties.Settings.Default.Save();
         }
 
@@ -92,10 +92,10 @@ namespace TwitchMonitor
         {
             if (ListBox1.SelectedIndex != -1)
             {
-                lists.Remove(ListBox1.SelectedItem.ToString());
+                _lists.Remove(ListBox1.SelectedItem.ToString());
                 ListBox1.Items.RemoveAt(ListBox1.SelectedIndex);
             }
-            Properties.Settings.Default.listStrings = lists;
+            Properties.Settings.Default.listStrings = _lists;
             Properties.Settings.Default.Save();
         }
 
