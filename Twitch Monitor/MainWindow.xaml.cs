@@ -14,7 +14,7 @@ namespace TwitchMonitor
     public partial class MainWindow
     {
         public System.Windows.Forms.NotifyIcon MyNotifyIcon;
-        List<String> list = new List<String>();
+        List<string> list = new List<string>();
         System.Collections.Specialized.StringCollection lists = new System.Collections.Specialized.StringCollection();
 
         public MainWindow()
@@ -78,7 +78,7 @@ namespace TwitchMonitor
 
         private void WatchButton_Click(object sender, RoutedEventArgs e)
         {
-            Process cmd = new Process();
+            var cmd = new Process();
             cmd.StartInfo.FileName = "cmd.exe";
             cmd.StartInfo.RedirectStandardInput = true;
             cmd.StartInfo.RedirectStandardOutput = true;
@@ -111,18 +111,17 @@ namespace TwitchMonitor
 
         async Task<bool> AsyncRequest(Stream check)
         {
-            using (HttpClient request = new HttpClient())
+            using (var request = new HttpClient())
             {
                 request.DefaultRequestHeaders.TryAddWithoutValidation("Client-ID",
                     "OAuth 6wkv85t0txkdm471qaimy8mugxhzda");
-                using (HttpResponseMessage response =
+                using (var response =
                     await request.GetAsync("https://api.twitch.tv/kraken/streams/" + check.ToString().Substring(17)))
-                using (HttpContent content = response.Content)
+                using (var content = response.Content)
                 {
-                    String result = await content.ReadAsStringAsync();
-
-                    JObject deserialize = JObject.Parse(result);
-                    IList<JToken> results = deserialize["stream"].Children().ToList();
+                    var result = await content.ReadAsStringAsync();
+                    var deserialize = JObject.Parse(result);
+                    var results = deserialize["stream"].Children().ToList();
 
                     if (results.Count != 0)
                     {
@@ -140,7 +139,7 @@ namespace TwitchMonitor
 
         public void OnlineCheckTimer()
         {
-            Timer timer = new Timer();
+            var timer = new Timer();
             timer.Tick += new EventHandler(TimerTick);
             timer.Interval = 50000;
             timer.Start();
