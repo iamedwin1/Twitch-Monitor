@@ -20,14 +20,14 @@ namespace TwitchMonitor
         public MainWindow()
         {
             InitializeComponent();
-            MyNotifyIcon = new System.Windows.Forms.NotifyIcon();
+            MyNotifyIcon = new NotifyIcon();
             var mainwindow = (MainWindow) System.Windows.Application.Current.MainWindow;
-            mainwindow.StateChanged += this.MainWindow_Resize;
+            mainwindow.StateChanged += MainWindow_Resize;
 
 
             MyNotifyIcon.Visible = true;
-            MyNotifyIcon.Icon = new System.Drawing.Icon(SystemIcons.Application, 40, 40);
-            MyNotifyIcon.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(MyNotifyIcon_MouseDoubleClick);
+            MyNotifyIcon.Icon = new Icon(SystemIcons.Application, 40, 40);
+            MyNotifyIcon.MouseDoubleClick += MyNotifyIcon_MouseDoubleClick;
 
             if (Properties.Settings.Default.listStrings == null)
                 Properties.Settings.Default.listStrings = new System.Collections.Specialized.StringCollection();
@@ -44,21 +44,21 @@ namespace TwitchMonitor
 
         private void MainWindow_Resize(object sender, EventArgs e)
         {
-            if (WindowState.Minimized == this.WindowState)
+            if (WindowState.Minimized == WindowState)
             {
                 MyNotifyIcon.Visible = true;
-                this.Hide();
+                Hide();
             }
-            else if (WindowState.Normal == this.WindowState)
+            else if (WindowState.Normal == WindowState)
             {
                 MyNotifyIcon.Visible = false;
             }
         }
 
-        private void MyNotifyIcon_MouseDoubleClick(object sender, System.Windows.Forms.MouseEventArgs e)
+        private void MyNotifyIcon_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            this.Show();
-            this.WindowState = WindowState.Normal;
+            Show();
+            WindowState = WindowState.Normal;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -85,7 +85,7 @@ namespace TwitchMonitor
             cmd.StartInfo.CreateNoWindow = true;
             cmd.StartInfo.UseShellExecute = false;
             cmd.Start();
-            cmd.StandardInput.WriteLine("streamlink " + ListBox1.SelectedValue.ToString() + " best");
+            cmd.StandardInput.WriteLine("streamlink " + ListBox1.SelectedValue + " best");
             cmd.StandardInput.Flush();
             cmd.StandardInput.Close();
         }
@@ -140,7 +140,7 @@ namespace TwitchMonitor
         public void OnlineCheckTimer()
         {
             var timer = new Timer();
-            timer.Tick += new EventHandler(TimerTick);
+            timer.Tick += TimerTick;
             timer.Interval = 50000;
             timer.Start();
         }
