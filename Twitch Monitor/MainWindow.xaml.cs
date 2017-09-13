@@ -17,6 +17,8 @@ namespace TwitchMonitor
 
         private System.Collections.Specialized.StringCollection _lists;
 
+        // 
+
         public MainWindow()
         {
             InitializeComponent();
@@ -39,6 +41,25 @@ namespace TwitchMonitor
 
             CheckLive();
         }
+
+        // 
+
+        public void OnlineCheckTimer()
+        {
+            var timer = new Timer();
+            timer.Tick += TimerTick;
+            timer.Interval = 50000;
+            timer.Start();
+        }
+
+        public void LiveNotification(string streamName)
+        {
+            MyNotifyIcon.BalloonTipText = streamName + " is now live!";
+            MyNotifyIcon.BalloonTipTitle = "Twitch Monitor";
+            MyNotifyIcon.ShowBalloonTip(5000);
+        }
+
+        // 
 
         private void MainWindow_Resize(object sender, EventArgs e)
         {
@@ -65,13 +86,6 @@ namespace TwitchMonitor
             _lists.Add(TextBox1.Text);
             Properties.Settings.Default.listStrings = _lists;
             Properties.Settings.Default.Save();
-        }
-
-        public void LiveNotification(string streamName)
-        {
-            MyNotifyIcon.BalloonTipText = streamName + " is now live!";
-            MyNotifyIcon.BalloonTipTitle = "Twitch Monitor";
-            MyNotifyIcon.ShowBalloonTip(5000);
         }
 
         private void WatchButton_Click(object sender, RoutedEventArgs e)
@@ -107,7 +121,7 @@ namespace TwitchMonitor
             }
         }
 
-        async Task<bool> AsyncRequest(Stream check)
+        private async Task<bool> AsyncRequest(Stream check)
         {
             using (var request = new HttpClient())
             {
@@ -133,14 +147,6 @@ namespace TwitchMonitor
                 }
                 return false;
             }
-        }
-
-        public void OnlineCheckTimer()
-        {
-            var timer = new Timer();
-            timer.Tick += TimerTick;
-            timer.Interval = 50000;
-            timer.Start();
         }
 
         private void TimerTick(object sender, EventArgs e)
