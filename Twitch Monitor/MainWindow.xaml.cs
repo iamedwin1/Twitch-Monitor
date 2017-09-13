@@ -22,7 +22,7 @@ namespace TwitchMonitor
             InitializeComponent();
             MyNotifyIcon = new System.Windows.Forms.NotifyIcon();
             var mainwindow = (MainWindow) System.Windows.Application.Current.MainWindow;
-            mainwindow.StateChanged += this.frmMain_Resize;
+            mainwindow.StateChanged += this.MainWindow_Resize;
 
 
             MyNotifyIcon.Visible = true;
@@ -42,7 +42,7 @@ namespace TwitchMonitor
             CheckLive();
         }
 
-        private void frmMain_Resize(object sender, EventArgs e)
+        private void MainWindow_Resize(object sender, EventArgs e)
         {
             if (WindowState.Minimized == this.WindowState)
             {
@@ -76,7 +76,7 @@ namespace TwitchMonitor
             MyNotifyIcon.ShowBalloonTip(5000);
         }
 
-        private void watchButton_Click(object sender, RoutedEventArgs e)
+        private void WatchButton_Click(object sender, RoutedEventArgs e)
         {
             Process cmd = new Process();
             cmd.StartInfo.FileName = "cmd.exe";
@@ -90,7 +90,7 @@ namespace TwitchMonitor
             cmd.StandardInput.Close();
         }
 
-        private void delButton_Click(object sender, RoutedEventArgs e)
+        private void DeleteButton_Click(object sender, RoutedEventArgs e)
         {
             if (ListBox1.SelectedIndex != -1)
             {
@@ -141,12 +141,12 @@ namespace TwitchMonitor
         public void OnlineCheckTimer()
         {
             Timer timer = new Timer();
-            timer.Tick += new EventHandler(timer_tick);
+            timer.Tick += new EventHandler(TimerTick);
             timer.Interval = 50000;
             timer.Start();
         }
 
-        private void timer_tick(object sender, EventArgs e)
+        private void TimerTick(object sender, EventArgs e)
         {
             CheckLive();
         }
