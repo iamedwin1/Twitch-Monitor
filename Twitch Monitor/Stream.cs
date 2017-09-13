@@ -2,27 +2,35 @@ namespace TwitchMonitor
 {
     public class Stream
     {
-        public string URL { get; set; }
-        public bool live { get; set; } = false;
-        public Stream(string URL)
+
+        public Stream(string url)
         {
-            this.URL = URL;
-        }
-        public void goLive()
-        {
-            live = true;
-            var Test = (MainWindow)System.Windows.Application.Current.MainWindow;
-            Test.LiveNotification(URL);
+            Url = url;
         }
 
-        public void goOffline()
+        // 
+
+        public string Url { get; set; }
+
+        public bool Live { get; set; }
+
+        // 
+
+        public void GoLive()
         {
-            live = false;
+            Live = true;
+            var mainWindow = (MainWindow)System.Windows.Application.Current.MainWindow;
+            mainWindow.LiveNotification(Url);
+        }
+
+        public void GoOffline()
+        {
+            Live = false;
         }
 
         public override string ToString()
         {
-            return URL;
+            return Url;
         }
 
     }

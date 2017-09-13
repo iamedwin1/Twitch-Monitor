@@ -127,13 +127,13 @@ namespace TwitchMonitor
 
                     if (results.Count != 0)
                     {
-                        check.goLive();
+                        check.GoLive();
                         return true;
 
                     }
                     else if (results.Count == 0)
                     {
-                        check.goOffline();
+                        check.GoOffline();
                     }
                 }
                 return false;
