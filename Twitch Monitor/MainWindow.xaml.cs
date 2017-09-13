@@ -34,10 +34,8 @@ namespace TwitchMonitor
 
             lists = Properties.Settings.Default.listStrings;
 
-            for (int i = 0; i < Properties.Settings.Default.listStrings.Count; ++i)
-            {
-                ListBox1.Items.Add(new Stream(Properties.Settings.Default.listStrings[i]));
-            }
+            foreach (var url in Properties.Settings.Default.listStrings)
+                ListBox1.Items.Add(new Stream(url));
 
             CheckLive();
         }
