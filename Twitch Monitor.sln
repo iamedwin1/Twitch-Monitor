@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26730.12
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Twitch Monitor", "Twitch Monitor\Twitch Monitor.csproj", "{E91ABC12-15CA-4C3C-81B9-AEF225AB5988}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E91ABC12-15CA-4C3C-81B9-AEF225AB5988}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E91ABC12-15CA-4C3C-81B9-AEF225AB5988}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E91ABC12-15CA-4C3C-81B9-AEF225AB5988}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E91ABC12-15CA-4C3C-81B9-AEF225AB5988}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {44549BEA-8AE1-44FA-8A75-A7534E330DBC}
+	EndGlobalSection
+EndGlobal
