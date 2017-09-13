@@ -19,11 +19,9 @@ namespace TwitchMonitor
 
         public MainWindow()
         {
-
-
             InitializeComponent();
             MyNotifyIcon = new System.Windows.Forms.NotifyIcon();
-            var mainwindow = (MainWindow)System.Windows.Application.Current.MainWindow;
+            var mainwindow = (MainWindow) System.Windows.Application.Current.MainWindow;
             mainwindow.StateChanged += this.frmMain_Resize;
 
 
@@ -42,8 +40,8 @@ namespace TwitchMonitor
             }
 
             CheckLive();
-
         }
+
         private void frmMain_Resize(object sender, EventArgs e)
         {
             if (WindowState.Minimized == this.WindowState)
@@ -56,12 +54,12 @@ namespace TwitchMonitor
                 MyNotifyIcon.Visible = false;
             }
         }
-        private void MyNotifyIcon_MouseDoubleClick(object sender,System.Windows.Forms.MouseEventArgs e)
+
+        private void MyNotifyIcon_MouseDoubleClick(object sender, System.Windows.Forms.MouseEventArgs e)
         {
             this.Show();
             this.WindowState = WindowState.Normal;
         }
-
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -73,7 +71,7 @@ namespace TwitchMonitor
 
         public void LiveNotification(string streamName)
         {
-            MyNotifyIcon.BalloonTipText = streamName +" is now live!";
+            MyNotifyIcon.BalloonTipText = streamName + " is now live!";
             MyNotifyIcon.BalloonTipTitle = "Twitch Monitor";
             MyNotifyIcon.ShowBalloonTip(5000);
         }
@@ -92,8 +90,6 @@ namespace TwitchMonitor
             cmd.StandardInput.Close();
         }
 
-
-
         private void delButton_Click(object sender, RoutedEventArgs e)
         {
             if (ListBox1.SelectedIndex != -1)
@@ -109,15 +105,18 @@ namespace TwitchMonitor
         {
             for (int i = 0; i != ListBox1.Items.Count; ++i)
             {
-                AsyncRequest(((Stream)ListBox1.Items.GetItemAt(i)));
+                AsyncRequest(((Stream) ListBox1.Items.GetItemAt(i)));
             }
         }
+
         async Task<bool> AsyncRequest(Stream check)
         {
             using (HttpClient request = new HttpClient())
             {
-                request.DefaultRequestHeaders.TryAddWithoutValidation("Client-ID", "OAuth 6wkv85t0txkdm471qaimy8mugxhzda");
-                using (HttpResponseMessage response = await request.GetAsync("https://api.twitch.tv/kraken/streams/" + check.ToString().Substring(17)))
+                request.DefaultRequestHeaders.TryAddWithoutValidation("Client-ID",
+                    "OAuth 6wkv85t0txkdm471qaimy8mugxhzda");
+                using (HttpResponseMessage response =
+                    await request.GetAsync("https://api.twitch.tv/kraken/streams/" + check.ToString().Substring(17)))
                 using (HttpContent content = response.Content)
                 {
                     String result = await content.ReadAsStringAsync();
@@ -129,7 +128,6 @@ namespace TwitchMonitor
                     {
                         check.GoLive();
                         return true;
-
                     }
                     else if (results.Count == 0)
                     {
@@ -139,8 +137,6 @@ namespace TwitchMonitor
                 return false;
             }
         }
-
-
 
         public void OnlineCheckTimer()
         {
