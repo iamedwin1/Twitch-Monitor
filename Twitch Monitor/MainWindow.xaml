@@ -1,10 +1,9 @@
-﻿<Controls:MetroWindow x:Class="TwitchMonitor.MainWindow"
-        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+﻿<controls:MetroWindow x:Class="TwitchMonitor.MainWindow"
+        xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:WpfApp1"
         mc:Ignorable="d"
         Title="Twitch Monitor" Height="352" Width="542" MinWidth="542" MinHeight="352" WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize">
 
@@ -12,8 +11,9 @@
         <Button Content="Add Stream" HorizontalAlignment="Left" Margin="261,273,0,0" VerticalAlignment="Top" Width="84" Click="Button_Click" RenderTransformOrigin="-0.214,0.444"/>
         <TextBox x:Name="TextBox1" Height="20" Margin="46,274,287,0" TextWrapping="Wrap" Text="http://twitch.tv/example" VerticalAlignment="Top"/>
         <ListBox x:Name="ListBox1" HorizontalAlignment="Left" Height="207" Margin="46,28,0,0" VerticalAlignment="Top" Width="207" Cursor="Arrow"/>
-        <Button x:Name="watchButton" Content="Launch Stream" HorizontalAlignment="Left" Margin="46,244,0,0" VerticalAlignment="Top" Width="142" Height="1" Click="watchButton_Click" RenderTransformOrigin="0.599,1.56"/>
-        <Button x:Name="delButton" Content="Remove Stream" HorizontalAlignment="Left" Margin="364,273,0,0" VerticalAlignment="Top" Width="121" Click="delButton_Click"/>
+        <Button x:Name="WatchButton" Content="Launch Stream" HorizontalAlignment="Left" Margin="46,244,0,0" VerticalAlignment="Top" Width="142" Height="1" Click="WatchButton_Click" RenderTransformOrigin="0.599,1.56"/>
+        <Button x:Name="DeleteButton" Content="Remove Stream" HorizontalAlignment="Left" Margin="364,273,0,0" VerticalAlignment="Top" Width="121" Click="DeleteButton_Click"/>
 
     </Grid>
-</Controls:MetroWindow>
+</controls:MetroWindow>
+
