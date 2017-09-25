@@ -39,6 +39,7 @@ namespace TwitchMonitor
             foreach (var url in Properties.Settings.Default.listStrings)
                 ListBox1.Items.Add(new Stream(url));
 
+            OnlineCheckTimer();
             CheckLive();
         }
 
@@ -48,7 +49,7 @@ namespace TwitchMonitor
         {
             var timer = new Timer();
             timer.Tick += TimerTick;
-            timer.Interval = 50000;
+            timer.Interval = 200000;
             timer.Start();
         }
 
