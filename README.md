@@ -12,7 +12,15 @@ a program to notify you when specific streams go live
 
 
 
-to do
+
+
+
+
+
+
+
+
+## to do: ##
 
 add options: stream quality, optional custom sound for when someone goes live
 
