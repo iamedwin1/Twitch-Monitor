@@ -10,7 +10,7 @@
     <Grid Background="#FFFFE9E9">
         <Button Content="Add Stream" HorizontalAlignment="Left" Margin="261,273,0,0" VerticalAlignment="Top" Width="84" Click="Button_Click" RenderTransformOrigin="-0.214,0.444"/>
         <TextBox x:Name="TextBox1" Height="20" Margin="46,274,287,0" TextWrapping="Wrap" Text="http://twitch.tv/example" VerticalAlignment="Top"/>
-        <ListBox x:Name="ListBox1" HorizontalAlignment="Left" Height="207" Margin="46,28,0,0" VerticalAlignment="Top" Width="207" Cursor="Arrow"/>
+        <ListBox x:Name="ListBox1" HorizontalAlignment="Left" Height="207" Margin="46,28,0,0" VerticalAlignment="Top" Width="257" Cursor="Arrow"/>
         <Button x:Name="WatchButton" Content="Launch Stream" HorizontalAlignment="Left" Margin="46,244,0,0" VerticalAlignment="Top" Width="142" Height="1" Click="WatchButton_Click" RenderTransformOrigin="0.599,1.56"/>
         <Button x:Name="DeleteButton" Content="Remove Stream" HorizontalAlignment="Left" Margin="364,273,0,0" VerticalAlignment="Top" Width="121" Click="DeleteButton_Click"/>
 

@@ -17,7 +17,6 @@ namespace TwitchMonitor
 
         private System.Collections.Specialized.StringCollection _lists;
 
-        // 
 
         public MainWindow()
         {
@@ -83,10 +82,13 @@ namespace TwitchMonitor
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            ListBox1.Items.Add(new Stream(TextBox1.Text));
+            Stream adding = new Stream(TextBox1.Text);
+            ListBox1.Items.Add(adding);
             _lists.Add(TextBox1.Text);
             Properties.Settings.Default.listStrings = _lists;
             Properties.Settings.Default.Save();
+
+            AsyncRequest(adding);
         }
 
         private void WatchButton_Click(object sender, RoutedEventArgs e)
@@ -107,8 +109,9 @@ namespace TwitchMonitor
         {
             if (ListBox1.SelectedIndex != -1)
             {
-                _lists.Remove(ListBox1.SelectedItem.ToString());
-                ListBox1.Items.RemoveAt(ListBox1.SelectedIndex);
+                Stream check = (Stream)ListBox1.SelectedItem;
+                _lists.Remove(check.Url);
+                ListBox1.Items.RemoveAt(ListBox1.Items.IndexOf(check));
             }
             Properties.Settings.Default.listStrings = _lists;
             Properties.Settings.Default.Save();
@@ -127,9 +130,9 @@ namespace TwitchMonitor
             using (var request = new HttpClient())
             {
                 request.DefaultRequestHeaders.TryAddWithoutValidation("Client-ID",
-                    "OAuth 6wkv85t0txkdm471qaimy8mugxhzda");
+                    "6wkv85t0txkdm471qaimy8mugxhzda");
                 using (var response =
-                    await request.GetAsync("https://api.twitch.tv/kraken/streams/" + check.ToString().Substring(17)))
+                    await request.GetAsync("https://api.twitch.tv/kraken/streams/" + check.Url.Substring(17)))
                 using (var content = response.Content)
                 {
                     var result = await content.ReadAsStringAsync();
@@ -138,12 +141,21 @@ namespace TwitchMonitor
 
                     if (results.Count != 0)
                     {
-                        check.GoLive();
+                        if (check.Live == false)
+                        {
+                            check.GoLive();
+                            int indx = ListBox1.Items.IndexOf(check);
+                            ListBox1.Items[indx] = ListBox1.Items[indx];
+                            ListBox1.Items.Refresh();
+                        }
                         return true;
                     }
                     else if (results.Count == 0)
                     {
                         check.GoOffline();
+                        int indx = ListBox1.Items.IndexOf(check);
+                        ListBox1.Items[indx] = ListBox1.Items[indx];
+                        ListBox1.Items.Refresh();
                     }
                 }
                 return false;
