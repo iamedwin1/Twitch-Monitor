@@ -100,7 +100,9 @@ namespace TwitchMonitor
             cmd.StartInfo.CreateNoWindow = true;
             cmd.StartInfo.UseShellExecute = false;
             cmd.Start();
-            cmd.StandardInput.WriteLine("streamlink " + ListBox1.SelectedValue + " best");
+            String clipped = ListBox1.SelectedValue.ToString();
+            clipped = clipped.Remove(clipped.IndexOf(" [Live!]", 8));
+            cmd.StandardInput.WriteLine("streamlink " + clipped + " best");
             cmd.StandardInput.Flush();
             cmd.StandardInput.Close();
         }
@@ -130,14 +132,15 @@ namespace TwitchMonitor
             using (var request = new HttpClient())
             {
                 request.DefaultRequestHeaders.TryAddWithoutValidation("Client-ID",
-                    "6wkv85t0txkdm471qaimy8mugxhzda");
+                    "npu8pwcltjhninook4d29ldfrfkvzv");
                 using (var response =
-                    await request.GetAsync("https://api.twitch.tv/kraken/streams/" + check.Url.Substring(17)))
+                    await request.GetAsync("https://api.twitch.tv/helix/streams?user_login=" + check.Url.Substring(17)))
                 using (var content = response.Content)
                 {
                     var result = await content.ReadAsStringAsync();
                     var deserialize = JObject.Parse(result);
-                    var results = deserialize["stream"].Children().ToList();
+                    var results = deserialize["data"].Children().ToList();
+                    
 
                     if (results.Count != 0)
                     {
